@@ -24,9 +24,18 @@ def exception_handler(func: Callable) -> Callable:
             with open("exception_log.txt", "a+") as file:
                 data = {
                     "date": str(datetime.now()),
-                    "status_code": error.status_code,
-                    "message": error.detail,
+                    "message": str(error),
                 }
-                file.write(json.dumps(data) + '\n')
+
+                if hasattr(error, "status_code"):
+                    data["status_code"] = error.status_code
+                else:
+                    data["status_code"] = 500
+
+                if hasattr(error, "detail"):
+                    data["detail"] = error.detail
+
+                file.write(json.dumps(data) + "\n")
             raise error
+
     return wrapper

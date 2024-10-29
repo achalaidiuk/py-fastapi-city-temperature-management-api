@@ -66,7 +66,7 @@ async def update_city_by_city_id(
 ):
     updated_city = await get_city_by_id(db, city_id)
     if not updated_city:
-        raise HTTPException(status_code=404, detail="City not founded")
+        raise HTTPException(status_code=404, detail="City not found")
 
     try:
         for key, value in city_data.dict().items():
@@ -94,7 +94,7 @@ async def update_city_by_city_id(
 async def delete_city(db: AsyncSession, city_id: int):
     city = await get_city_by_id(db, city_id)
     if not city:
-        raise HTTPException(status_code=404, detail="City not founded")
+        raise HTTPException(status_code=404, detail="City not found")
 
     try:
         await db.delete(city)

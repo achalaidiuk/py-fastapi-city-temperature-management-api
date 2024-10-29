@@ -29,7 +29,7 @@ async def get_temperature_list(
     return await crud.get_temperature_list(db=db)
 
 
-@router.post("/temperature/update/", response_model=list[schemas.Temperature])
+@router.post("/temperature/update/", response_model=dict)
 async def update_temperature(db: Session = Depends(get_db)):
     result = await crud.set_temperature(db=db)
     return result

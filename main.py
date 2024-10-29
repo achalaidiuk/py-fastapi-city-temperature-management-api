@@ -9,7 +9,7 @@ app.include_router(
     router=cities_router, prefix="/weather", tags=["Cities"]
 )
 app.include_router(
-    router=temperature_router, prefix="/weather", tags=["Temperature"]
+    router=temperature_router, prefix="/temperature", tags=["Temperature"]
 )
 
 

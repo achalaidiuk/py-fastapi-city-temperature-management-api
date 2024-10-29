@@ -1,7 +1,7 @@
 import os
 
 import httpx
-from fastapi import Depends
+from fastapi import Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from dotenv import load_dotenv
 
@@ -20,7 +20,8 @@ async def check_service_connection():
             f"{API_URL}/current.json", params={"key": API_KEY, "q": "London"}
         )
     if response.status_code != 200:
-        raise HTTPException(status_code=response.status_code, detail=response)
+        error_detail = response.json() if response.headers.get("Content-Type") == "application/json" else response.text
+        raise HTTPException(status_code=response.status_code, detail=error_detail)
     else:
         return True
 

@@ -4,7 +4,7 @@ from datetime import datetime
 
 class TemperatureBase(BaseModel):
     date_time: datetime
-    temperature: int
+    temperature: float
 
 
 class Temperature(TemperatureBase):

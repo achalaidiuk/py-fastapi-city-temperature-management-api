@@ -43,7 +43,7 @@ async def set_temperature(db: AsyncSession):
         data = {
             "city_id": city_data["city_id"],
             "date_time": date_time,
-            "temperature": int(city_data["current"]["temp_c"]),
+            "temperature": float(city_data["current"]["temp_c"]),
         }
         temperature_obj = await get_temperatures_by_city_id(db, city_id=data["city_id"])
 
